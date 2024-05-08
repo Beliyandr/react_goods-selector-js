@@ -16,45 +16,56 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGoodу, setSelectedGoodу] = useState('Jam')
+  const [selectedGoodу, setSelectedGoodу] = useState('Jam');
 
-  const selected = (name) => {
+  const selected = name => {
     if (name === selectedGoodу) {
-      setSelectedGoodу('')
+      setSelectedGoodу('');
     } else {
-      setSelectedGoodу(name)
+      setSelectedGoodу(name);
     }
-  }
+  };
 
   const clear = () => {
-    setSelectedGoodу('')
-  }
-
+    setSelectedGoodу('');
+  };
 
   return (
     <main className="section container">
-
       <h1 className="title is-flex is-align-items-center">
-        {selectedGoodу ? selectedGoodу + ' is' : 'No goods'} selected
-        {
-          selectedGoodу
-          &&
-          <button data-cy="ClearButton" type="button" className="delete ml-3" onClick={clear} />
-        }
+        {selectedGoodу ? `${selectedGoodу} is` : 'No goods'} selected
+        {selectedGoodу && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={clear}
+          />
+        )}
       </h1>
 
       <table className="table">
         <tbody>
-
           {goods.map(good => {
             return (
-              <tr data-cy="Good" className={selectedGoodу === good ? "has-background-success-light" : ''}>
+              <tr
+                data-cy="Good"
+                className={
+                  selectedGoodу === good ? 'has-background-success-light' : ''
+                }
+              >
                 <td>
                   <button
-                    data-cy={selectedGoodу === good ? "RemoveButton" : "AddButton"}
+                    data-cy={
+                      selectedGoodу === good ? 'RemoveButton' : 'AddButton'
+                    }
                     type="button"
-                    className={selectedGoodу === good ? "button is-info" : "button"}
-                    onClick={() => { selected(good) }}
+                    className={
+                      selectedGoodу === good ? 'button is-info' : 'button'
+                    }
+                    onClick={() => {
+                      selected(good);
+                    }}
                   >
                     {selectedGoodу === good ? '-' : '+'}
                   </button>
@@ -64,10 +75,8 @@ export const App = () => {
                   {good}
                 </td>
               </tr>
-            )
+            );
           })}
-
-
 
           {/* <tr data-cy="Good" className="has-background-success-light">
             <td>
@@ -100,4 +109,4 @@ export const App = () => {
       </table>
     </main>
   );
-}
+};
