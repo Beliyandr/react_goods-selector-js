@@ -30,10 +30,16 @@ export const App = () => {
     setSelectedGoodу('');
   };
 
+  const showGoods = (good) => {
+    return good ? `${good} is selected` : 'No goods selected'
+  }
+
+
+
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGoodу ? `${selectedGoodу} is` : 'No goods'} selected
+        {showGoods(selectedGoodу)}
         {selectedGoodу && (
           <button
             data-cy="ClearButton"
@@ -47,8 +53,10 @@ export const App = () => {
       <table className="table">
         <tbody>
           {goods.map(good => {
+            const isSelceted = selectedGoodу === good;
             return (
               <tr
+                key={good}
                 data-cy="Good"
                 className={
                   selectedGoodу === good ? 'has-background-success-light' : ''
@@ -57,17 +65,17 @@ export const App = () => {
                 <td>
                   <button
                     data-cy={
-                      selectedGoodу === good ? 'RemoveButton' : 'AddButton'
+                      isSelceted ? 'RemoveButton' : 'AddButton'
                     }
                     type="button"
                     className={
-                      selectedGoodу === good ? 'button is-info' : 'button'
+                      isSelceted ? 'button is-info' : 'button'
                     }
                     onClick={() => {
                       selected(good);
                     }}
                   >
-                    {selectedGoodу === good ? '-' : '+'}
+                    {isSelceted ? '-' : '+'}
                   </button>
                 </td>
 
